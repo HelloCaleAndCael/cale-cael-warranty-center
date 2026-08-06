@@ -1,0 +1,23 @@
+# https://shopify.dev/docs/api/customer-account-ui-extensions/2026-04/configuration
+
+api_version = "2026-04"
+
+[[extensions]]
+name = "warranty-requests-page"
+handle = "warranty-requests-page"
+type = "ui_extension"
+uid = "4db82c74-66ea-1c0e-0336-6abbc8ca4a5a6163f6b4"
+
+# Un target de tipo "full page" no puede coexistir con otros targets
+# en la misma extensión, así que esta extensión solo tiene este.
+[[extensions.targeting]]
+module = "./src/WarrantyRequestsPage.jsx"
+target = "customer-account.page.render"
+
+[extensions.capabilities]
+# Necesario para leer/crear las solicitudes en tu backend (Supabase vía tu API)
+api_access = true
+
+# IMPORTANTE: esto estaba comentado. Sin esto, el fetch() a tu backend
+# para leer/crear solicitudes de garantía va a fallar.
+network_access = true

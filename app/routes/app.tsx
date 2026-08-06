@@ -1,6 +1,7 @@
 import type { HeadersFunction, LoaderFunctionArgs } from "react-router";
-import { Outlet, useRouteError } from "react-router";
+import { Link, Outlet, useRouteError } from "react-router";
 import { boundary } from "@shopify/shopify-app-react-router/server";
+import { NavMenu } from "@shopify/app-bridge-react";
 
 import { authenticate } from "../shopify.server";
 
@@ -10,7 +11,17 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 };
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <>
+      <NavMenu>
+        <Link to="/app" rel="home">
+          Home
+        </Link>
+        <Link to="/app/warranty-admin">Warranty Requests</Link>
+      </NavMenu>
+      <Outlet />
+    </>
+  );
 }
 
 export function ErrorBoundary() {
